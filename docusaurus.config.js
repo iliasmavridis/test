@@ -9,17 +9,6 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const { GITHUB_REF } = process.env;
 
-// Determine baseUrl based on the branch
-let baseUrl = '/'; // Default baseUrl
-
-if (GITHUB_REF) {
-  if (GITHUB_REF === 'refs/heads/main') {
-    baseUrl = '/'; // Production base URL
-  } else if (GITHUB_REF === 'refs/heads/develop') {
-    baseUrl = '/staging/'; // Staging base URL
-  }
-}
-
 const config = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
