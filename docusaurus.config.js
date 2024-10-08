@@ -28,7 +28,7 @@ const config = {
   // Set the production URL of your site here
   url: 'https://your-docusaurus-site.example.com',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/',
+  baseUrl: '/test/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
