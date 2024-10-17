@@ -1,4 +1,4 @@
-name: Trigger build on docs change
+name: Trigger website build on docs change
 on:
   push:
     branches:
