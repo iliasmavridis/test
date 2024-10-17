@@ -6,11 +6,8 @@ on:
     paths:
       - 'docs/**'
   pull_request:
-    branches:
-      - main
     paths:
       - 'docs/**'  
-  workflow_dispatch: 
   
 jobs:
   # Dispatch event for production build on docs changes in main branch
