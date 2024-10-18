@@ -15,6 +15,21 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2  # We need at least the last two commits
+
+    - name: Get merged PR number
+      id: get-pr-number
+      run: |
+        PR_NUMBER=$(git log -1 --pretty=format:'%s' | grep -oP '#\K\d+' || echo "")
+        if [ -n "$PR_NUMBER" ]; then
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+        else
+          echo "No PR number found in the commit message"
+        fi
+
     - name: Dispatch Production Build Event
       uses: peter-evans/repository-dispatch@v3
       with:
@@ -23,10 +38,10 @@ jobs:
         event-type: docs-updated-on-main
         client-payload: >
           {
-            "pr_number": "${{ github.event.number }}",
+            "pr_number": "${{ steps.get-pr-number.outputs.pr_number }}",
             "repo": "${{ github.repository }}",
-            "sha": "${{ github.event.pull_request.head.sha }}"
-          }        
+            "sha": "${{ github.sha }}"
+          }  
 
   # Dispatch event for PR preview on docs
   preview-build:
