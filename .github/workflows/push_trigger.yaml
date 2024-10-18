@@ -21,6 +21,12 @@ jobs:
         token: ${{ secrets.PAT }}
         repository: iliasmavridis/test2
         event-type: docs-updated-on-main
+        client-payload: >
+          {
+            "pr_number": "${{ github.event.number }}",
+            "repo": "${{ github.repository }}",
+            "sha": "${{ github.event.pull_request.head.sha }}"
+          }        
 
   # Dispatch event for PR preview on docs
   preview-build:
